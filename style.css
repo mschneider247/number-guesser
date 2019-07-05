@@ -1,0 +1,37 @@
+#user__article,  #user__article--latest-score{
+  width: 500px;
+  background-color: white;
+  border: 1px solid grey;
+  border-radius: 5px;
+  display: flex;
+  margin: 10px;
+}
+
+#user__article {
+  justify-content: space-around;
+  align-items: center;
+  height: 420px;
+  flex-direction: column;
+}
+
+#user__article--latest-score {
+  height: 200px;
+  display: block;
+}
+
+.user__section--current-guesses {
+  display: flex;
+  justify-content: space-around;
+}
+
+.user__article--latest-score {
+  margin-left: 6%;
+}
+
+.user__p--current-guess-big {
+  color: pink;
+}
+
+body {
+  background-color: lightgray;
+}
