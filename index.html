@@ -3,16 +3,21 @@
 <head>
   <title>Number Guesser</title>
   <link rel="stylesheet" type="text/css" href="style.css">
+ <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,700&display=swap" rel="stylesheet">
 </head>
 <body>
   <header>
-      <h1 class="navbar__h1">number guesser</h1>
-      <hr>
-      <h4 class="navbar__h4">ultimate challenger edition</h4>
-      <hr>
+    <div class="navbar__h1">
+      <h1><span>NUMBER</span> GUESSER</h1>
+    </div>
+      <div class="navbar__subhead">
+        <hr>
+        <h4 class="navbar__h4">ULTIMATE CHALLENGER EDITION</h4>
+        <hr>
+    </div>
   </header>
-  <main>
-    <section class="player">
+  <main class="main">
+    <main class="game">
       <container class="range">
         <h2 class="range__form--h2">Set Range</h2>
         <div class="range__form--row">
@@ -68,9 +73,9 @@
           </div>
         </section>
       </article>
-    </section>
-    <section class="section2">
-<container class="card__container">
+    </main>
+    <main class="results">
+      <container class="card__container">
         <div class="card__container--title">
           <span class="card__span--ch1">CHALLENGER 1 NAME</span>
           <p>vs</p>
@@ -85,7 +90,7 @@
         <div class="card__span--main">
           <span class="card__span-guess"></span><p>GUESSES</p>
           <span class="card__span-minutes"></span><p>MINUTES</p>
-          <button class="card__span--exit" type="button">(X)</button>
+          <button class="card__span--exit" type="button">X</button>
         </div>  
       </container>
     </section>
