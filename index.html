@@ -3,26 +3,37 @@
 <head>
   <title>Number Guesser</title>
   <link rel="stylesheet" type="text/css" href="style.css">
+ <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,700&display=swap" rel="stylesheet">
 </head>
 <body>
   <header>
-      <h1 class="navbar__h1">number guesser</h1>
-      <hr>
-      <h4 class="navbar__h4">ultimate challenger edition</h4>
-      <hr>
+    <div class="navbar__h1">
+      <h1><span>NUMBER</span> GUESSER</h1>
+    </div>
+      <div class="navbar__subhead">
+        <hr>
+        <h4 class="navbar__h4">ULTIMATE CHALLENGER EDITION</h4>
+        <hr>
+    </div>
   </header>
-  <main>
-    <section class="player">
-      <article id="range">
-        <h5>Set Range</h5>
-        <form class="range__form">
-          <label>Min Range</label>
-          <input class="range__input--min" type="text" name="">
-          <label>Max Range</label>
-          <input class="range__input--max" type="text" name="">
-        </form>
-        <button></button>
-      </article>
+  <main class="main">
+    <main class="game">
+      <container class="range">
+        <h2 class="range__form--h2">Set Range</h2>
+        <div class="range__form--row">
+          <form class="range__form">
+            <div class="range__input--label">
+              <label>Min Range</label>
+              <input class="range__input--min" type="text" name="">
+            </div>
+            <div class="range__input--label">
+              <label>Max Range</label>
+              <input class="range__input--label--max" type="text" name="">
+            </div>
+          </form>
+            <button>UPDATE</button>
+        </div>
+      </container>
       <article id="user__article">
         <p>The Current Range is<span class="user__span--min"></span>to<span class="user__span--max"></span></p>
         <p>Challenger 1</p>
@@ -62,24 +73,26 @@
           </div>
         </section>
       </article>
-    </section>
-    <section class="section2">
-      <article class="card__article">
-        <div>
+    </main>
+    <main class="results">
+      <container class="card__container">
+        <div class="card__container--title">
           <span class="card__span--ch1">CHALLENGER 1 NAME</span>
           <p>vs</p>
           <span class="card__span--ch2">CHALLENGER 2 NAME</span>
         </div>
-        <div>
-          <span class="score-card-winner">CHALLENGER 1 NAME</span>
-          <p>WINNER</p>
+        <hr class="card__hr">
+        <div class="card__container--winner">
+          <span class="card__span">CHALLENGER 1 NAME</span>
+          <p class="card__span">WINNER</p>
         </div>
-        <div>
-          <span class="score-card-guesses"></span><p>GUESSES</p>
-          <span class="score-card-minutes"></span><p>MINUTES</p>
-          <button class="score-card-exit" type="button">(X)</button>
+        <hr class="card__hr">
+        <div class="card__span--main">
+          <span class="card__span-guess"></span><p>GUESSES</p>
+          <span class="card__span-minutes"></span><p>MINUTES</p>
+          <button class="card__span--exit" type="button">X</button>
         </div>  
-      </article>
+      </container>
     </section>
   </main>
   <script type="text/javascript" src="main.js"></script>
