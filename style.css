@@ -3,11 +3,150 @@
   color: red;
 }
 
-#user__article,  #user__article--latest-score{
-  width: 500px;
+body {
+  background-color: lightgray;
+}
+
+
+* {
+  margin:0px;
+  padding:0px;
+  font-family: 'Open Sans', sans-serif;
+
+}
+
+/*header-------------*/
+
+header {
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #404041;
+  width:100%;
+  padding: 15px;
+
+}
+
+span {
+  font-weight: 700;
+}
+
+.navbar__h1 {
+  display: flex;
+  justify-content: center;
+  font-size: 45px;
+  font-weight: 300;
+  color:#DD1972;
+}
+
+
+.navbar__subhead {
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-weight: 300;
+  color:#FFFFFF;
+}
+
+hr {
+  width: 260px;
+  height:.2px;
+  background-color: #FFFFFF;
+  margin:10px;
+}
+
+/*column alignment----*/
+
+.main {
+  display: flex;
+  flex-wrap: wrap;
+
+}
+
+.game {
+  display:flex;
+  flex-direction: column;
+  flex:1;
+  background-color: #F7F7F7;
+}
+
+/*right side*/
+
+.results {
+  display:flex;
+  flex:1;
+  background-color: #D0D2D3;
+}
+
+
+/*set range ---------*/
+
+.range {
+  display: flex;
+  flex-direction: column;
+  width: %;
+  min-height: 100px;
+  padding: 15px;
+  background-color: #FFFFFF;
+  border: 1px solid grey;
+  border-radius: 2px;
+  margin: 10px;
+
+}
+
+.range__form--row {
+  display:flex;
+  flex-direction: row;
+  align-items: flex-end;
+
+}
+
+.range__form--h2 {
+  padding-bottom: 13px;
+}
+
+.range__form {
+  display:flex;
+  flex-direction: row;
+  width: 65%;
+  height: 35px;
+  justify-content: space-between;
+}
+
+
+.range__input--label {
+  display:flex;
+  flex-direction: column;
+  justify-content:flex-end;
+  padding-right: 20px;
+  padding-top: 15px;
+  width: 40%;
+}
+
+.range__input--min, 
+.range__input--max {
+  height: 35px;
+}
+
+button {
+  align-content: flex-end;
+  width: 30%;
+  height: 35px;
+  border-radius: 13px;
+  color:#ffffff;
+  background-color: #6E6E6E;
+  font-weight: 700;
+}
+
+/*user article--------- */
+
+#user__article,  
+#user__article--latest-score {
+  width: 95%;
   background-color: white;
   border: 1px solid grey;
-  border-radius: 5px;
+  border-radius: 2px;
   display: flex;
   margin: 10px;
 }
@@ -37,10 +176,74 @@
   color: pink;
 }
 
-body {
-  background-color: lightgray;
+
+/*winning card container*/
+
+
+.card__container {
+  display: flex;
+  flex-direction: center;
+  justify-content: center;
+  border: solid 1px black;
+  height: 200px;
+  width: 85%;
+  padding: 20px;
+  margin: 10px;
+  background-color: #FFFFFF;
+  border: 1px solid grey;
+  border-radius: 2px;
+ 
 }
 
-header {
-  text-align: center;
+.card__span {
+  font-size: 35px;
+  color:#6E6E6E;
+  }
+
+.card__container {
+  display: flex;
+  flex-direction: column; 
+  justify-content: center;
+}
+
+.card__hr {
+  display:flex;
+  align-content: center;
+  width:97%;
+}
+
+.card__container--title {
+  display:flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.card__container--winner {
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card__span--guess,
+.card__span--minutes,
+.card__span--main {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; 
+  align-items: center;
+  align-content: flex-start;
+}
+
+.card__span--ch1, 
+.card__span--ch2 {
+   color:#D0D2D3;
+   font-size: 15px;
+   font-weight: 700;
+}
+
+.card__span--exit {
+  border-radius: 50%;
+  font-weight: 300;
+  padding:0px 7px;
+  width:7%;
 }
