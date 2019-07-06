@@ -1,3 +1,8 @@
+#debugging-box {
+  position: absolute;
+  color: red;
+}
+
 #user__article,  #user__article--latest-score{
   width: 500px;
   background-color: white;
@@ -34,4 +39,8 @@
 
 body {
   background-color: lightgray;
+}
+
+header {
+  text-align: center;
 }

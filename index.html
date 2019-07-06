@@ -5,6 +5,9 @@
   <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
+  <section id="debugging-box">
+      <p>Correct Guess: <span id="correct-guess"></span></p>
+  </section>
   <header>
       <h1 class="navbar__h1">number guesser</h1>
       <hr>
@@ -25,40 +28,40 @@
       </article>
       <article id="user__article">
         <p>The Current Range is<span class="user__span--min"></span>to<span class="user__span--max"></span></p>
-        <p>Challenger 1</p>
-        <form class="user__form--ch1">
-          <label>Name</label>
-          <input type="text" name="">
-          <label>Guess</label>
-          <input type="text" name="">
-        </form>
-        <p>Challenger 2</p>
+        <p class="ch1-name">Challenger 1</p>
+          <form class="user__form--ch1">
+            <label>Name</label>
+            <input id="user__input--ch1-name" type="text" name="">
+            <label>Guess</label>
+            <input id="user__input--ch1-guess" type="text" name="">
+          </form>
+        <p class="ch2-name">Challenger 2</p>
           <form class="user__form--ch2">
             <label>Name</label>
-            <input type="text" name="">
+            <input id="user__input--ch2-name" type="text" name="">
             <label>Guess</label>
-            <input type="text" name="">
+            <input id="user__input--ch2-guess" type="text" name="">
           </form>
         <section class="user__section--submit-btns">
-          <button name="Submit Guess" type="button">Submit Guess</button>
+          <button id="submit__btn" name="Submit Guess" type="button">Submit Guess</button>
           <button name="Reset Game" type="button">Reset Game</button>
-          <button nmae="Clear Game" type="button">Clear Game</button>
+          <button name="Clear Game" type="button">Clear Game</button>
         </section>
       </article>
       <article id="user__article--latest-score">
         <p class="user__article--latest-score">Latest Score</p>
         <section class="user__section--current-guesses">
           <div class="">
-            <p class="">Challenger 1 Name</p>
+            <p class="ch1-name">Challenger 1 Name</p>
             <p>current guess</p>
-            <p class="user__p--current-guess-big">97</p>
-            <p class="challenger-one-highlow">too high/too low</p>          
+            <p id="ch1--current-guess">97</p>
+            <p id="ch1-highlow">too high/too low</p>          
           </div>
           <div class="">
-            <p class="">Challenger 2 Name</p>
+            <p class="ch2-name">Challenger 2 Name</p>
             <p>current guess</p>
-            <p class="user__p--current-guess-big">3</p>
-            <p class="challenger-two-highlow">too high/too low</p>          
+            <p id="ch2--current-guess">3</p>
+            <p id="ch2-highlow">too high/too low</p>          
           </div>
         </section>
       </article>
