@@ -15,6 +15,9 @@ var ch2Highlow = document.querySelector('#ch2-highlow')
 
 submitBtn.addEventListener('click', namesAndGuesses);
 
+// Fills in user inputed names and guess
+// Also fires off another function checkGuess to see if the guess
+// is correct or too high, too low
 function namesAndGuesses() {
   console.log("Function namesAndGuesses is being called");
   ch1Name.innerText = ch1NameInput.value;
@@ -25,6 +28,7 @@ function namesAndGuesses() {
   ch2Highlow.innerText = checkGuess(ch2GuessInput.value);
 } 
 
+// Checks to see if a user's guess is too high, too low or a winner
 function checkGuess (playerGuess) {
   console.log(playerGuess);
   console.log(correctGuess.innerText);
@@ -33,6 +37,9 @@ function checkGuess (playerGuess) {
   }
   else if (playerGuess < correctGuess.innerText) {
     return "that's too low";
+  }
+  else {
+    return "WINNER!!!"
   }
 }
 
