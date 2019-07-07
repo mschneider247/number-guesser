@@ -15,11 +15,9 @@ var ch2Guess = document.querySelector('#ch2--current-guess');
 var ch1Highlow = document.querySelector('#ch1-highlow');
 var ch2Highlow = document.querySelector('#ch2-highlow');
 var correctGuess = document.querySelector('#correct-guess');
+
 rangeInputBtn.addEventListener('click', setRange);
-submitBtn.addEventListener('click', namesAndGuesses);
-
-
-
+submitBtn.addEventListener('click', startGame);
 
 function setRange() {
   // compareValue(minGuess, maxGuess);
@@ -43,15 +41,11 @@ function ranNumberFromRange(minRange, maxRange){
   return Math.floor(randomNum);
 }
 
-// function compareValue(minGuess, maxGuess) {
-//   if (minGuess >= maxGuess) {
-//     return console.log('Min is greater than or equal to Max, error!');
-//   };
-// };
-
-function namesAndGuesses() {
-  checkAlphaNumeric(ch1NameInput.value);
+function startGame() {
+  checkAlphaNumeric(ch1NameInput.value); 
   checkAlphaNumeric(ch2NameInput.value);
+  checkNumeric(ch1GuessInput.value);
+  checkNumeric(ch2GuessInput.value);
   changeAllNames(ch1NameInput.value, ch1Name);
   changeAllNames(ch2NameInput.value, ch2Name);
   ch1Guess.innerText = ch1GuessInput.value;
@@ -60,19 +54,36 @@ function namesAndGuesses() {
   ch2Highlow.innerText = checkGuess(ch2GuessInput.value);
 } 
 
-function changeAllNames(name, nameArray) {
-  for (var i = 0; i < nameArray.length; i++) {
-    nameArray[i].innerText=name; 
+// Checks user names to make sure they are Alpha Numeric
+function checkAlphaNumeric(name){
+  var letters = /^[0-9a-zA-Z]+$/;
+  if(name.match(letters)){ 
+  }
+  else {
+    // Clears fields, pops up error message;
+    ch1NameInput.value = "";
+    ch2NameInput.value = "";
+    return alert("Names must be Alpha Numeric");
   };
 };
 
-
-function checkAlphaNumeric(name){
-  var letters = /^[0-9a-zA-Z]+$/;
-  if(name.match(letters)){
+//Checks user guess to make sure its Numeric
+function checkNumeric(guess){
+  var num = /^[0-9]+$/;
+  if(guess.match(num)){ 
   }
   else {
-    return ch1NameInput.value = "";
+    // Clears fields, pops up error message;
+    ch1GuessInput.value = "";
+    ch2GuessInput.value = "";
+    return alert("Guess must be Numeric");
+  };
+};
+
+//Sets character name throughout the DOM
+function changeAllNames(name, nameArray) {
+  for (var i = 0; i < nameArray.length; i++) {
+    nameArray[i].innerText=name; 
   };
 };
 
@@ -87,36 +98,12 @@ function checkGuess (playerGuess) {
     return "that's too low";
   }
   else {
-    return "WINNER!!!"
+    return "BOOM!"
   }
 }
 
-
-// var submitBtn = document.querySelector('#submit__btn');
-// var ch1NameInput = document.querySelector('#user__input--ch1-name');
-// var ch1Name = document.querySelector('.ch1-name');
-// var ch2NameInput = document.querySelector('#user__input--ch2-name');
-// var ch2Name = document.querySelector('.ch2-name');
-
-
-// submitBtn.addEventListener('click', namesAndGuesses);
-
-// // Fills in user inputed names and guess
-// // Also fires off another function checkGuess to see if the guess
-// // is correct or too high, too low
-// function namesAndGuesses() {
-//   console.log("Function namesAndGuesses is being called");
-//   ch1Name.innerText = ch1NameInput.value;
-//   ch2Name.innerText = ch2NameInput.value;
-//   ch1Guess.innerText = ch1GuessInput.value;
-//   ch1Highlow.innerText = checkGuess(ch1GuessInput.value);
-//   ch2Guess.innerText = ch2GuessInput.value;
-//   ch2Highlow.innerText = checkGuess(ch2GuessInput.value);
-// } 
-
-
-
-
-// // Fill these in with more logic
-// userSpanMin.innerText = ' 1 ';
-// userSpanMax.innerText = ' 100 ';
+// function compareValue(minGuess, maxGuess) {
+//   if (minGuess >= maxGuess) {
+//     return console.log('Min is greater than or equal to Max, error!');
+//   };
+// };
