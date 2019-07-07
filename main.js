@@ -8,34 +8,56 @@ var ch1Name = document.querySelectorAll('.ch1-name');
 var ch2NameInput = document.querySelector('#user__input--ch2-name');
 var ch2Name = document.querySelectorAll('.ch2-name');
 var submitBtn = document.querySelector('#submit__btn');
-
+var ch1GuessInput = document.querySelector('#user__input--ch1-guess');
+var ch1Guess = document.querySelector('#ch1--current-guess');
+var ch2GuessInput = document.querySelector('#user__input--ch2-guess');
+var ch2Guess = document.querySelector('#ch2--current-guess');
+var ch1Highlow = document.querySelector('#ch1-highlow');
+var ch2Highlow = document.querySelector('#ch2-highlow');
+var correctGuess = document.querySelector('#correct-guess');
 rangeInputBtn.addEventListener('click', setRange);
 submitBtn.addEventListener('click', namesAndGuesses);
 
+
+
+
 function setRange() {
-  compareValue(minGuess, maxGuess);
-  userSpanMin.innerText = minGuess.value;
-  userSpanMax.innerText = maxGuess.value;
+  // compareValue(minGuess, maxGuess);
+  var minValue = minGuess.value;
+  var maxValue = maxGuess.value;
+  var generatedNumber = ranNumberFromRange(minValue, maxValue);
+  console.log("generatedNumber", generatedNumber);
+  userSpanMin.innerText = minValue;
+  userSpanMax.innerText = maxValue;
+  correctGuess.innerText = generatedNumber;
   minGuess.value = "";
   maxGuess.value = "";
 }
 
-function compareValue(minGuess, maxGuess) {
-  if (minGuess >= maxGuess) {
-    return console.log('Min is greater than or equal to Max, error!');
-  };
-};
+function ranNumberFromRange(minRange, maxRange){
+  var range = parseInt(maxRange) - parseInt(minRange);
+  console.log(typeof range)
+  console.log("range", range);
+  var randomNum = Math.random() * range + parseInt(minRange);
+  console.log(Math.floor(randomNum));
+  return Math.floor(randomNum);
+}
+
+// function compareValue(minGuess, maxGuess) {
+//   if (minGuess >= maxGuess) {
+//     return console.log('Min is greater than or equal to Max, error!');
+//   };
+// };
 
 function namesAndGuesses() {
+  checkAlphaNumeric(ch1NameInput.value);
+  checkAlphaNumeric(ch2NameInput.value);
   changeAllNames(ch1NameInput.value, ch1Name);
   changeAllNames(ch2NameInput.value, ch2Name);
-//   console.log("Function namesAndGuesses is being called");
-   // ch1Name.innerText = ch1NameInput.value;
-   // ch2Name.innerText = ch2NameInput.value;
-//   ch1Guess.innerText = ch1GuessInput.value;
-//   ch1Highlow.innerText = checkGuess(ch1GuessInput.value);
-//   ch2Guess.innerText = ch2GuessInput.value;
-//   ch2Highlow.innerText = checkGuess(ch2GuessInput.value);
+  ch1Guess.innerText = ch1GuessInput.value;
+  ch1Highlow.innerText = checkGuess(ch1GuessInput.value);
+  ch2Guess.innerText = ch2GuessInput.value;
+  ch2Highlow.innerText = checkGuess(ch2GuessInput.value);
 } 
 
 function changeAllNames(name, nameArray) {
@@ -45,18 +67,37 @@ function changeAllNames(name, nameArray) {
 };
 
 
-// var correctGuess = document.querySelector('#correct-guess');
+function checkAlphaNumeric(name){
+  var letters = /^[0-9a-zA-Z]+$/;
+  if(name.match(letters)){
+  }
+  else {
+    return ch1NameInput.value = "";
+  };
+};
+
+// Checks to see if a user's guess is too high, too low or a winner
+function checkGuess (playerGuess) {
+  console.log("Current Player Guess: " + playerGuess);
+  console.log("Correct Guess: " + correctGuess.innerText);
+  if (playerGuess > correctGuess.innerText) {
+    return "that's too high";
+  }
+  else if (playerGuess < correctGuess.innerText) {
+    return "that's too low";
+  }
+  else {
+    return "WINNER!!!"
+  }
+}
+
+
 // var submitBtn = document.querySelector('#submit__btn');
 // var ch1NameInput = document.querySelector('#user__input--ch1-name');
 // var ch1Name = document.querySelector('.ch1-name');
 // var ch2NameInput = document.querySelector('#user__input--ch2-name');
 // var ch2Name = document.querySelector('.ch2-name');
-// var ch1GuessInput = document.querySelector('#user__input--ch1-guess');
-// var ch1Guess = document.querySelector('#ch1--current-guess');
-// var ch2GuessInput = document.querySelector('#user__input--ch2-guess');
-// var ch2Guess = document.querySelector('#ch2--current-guess');
-// var ch1Highlow = document.querySelector('#ch1-highlow');
-// var ch2Highlow = document.querySelector('#ch2-highlow');
+
 
 // submitBtn.addEventListener('click', namesAndGuesses);
 
@@ -73,23 +114,9 @@ function changeAllNames(name, nameArray) {
 //   ch2Highlow.innerText = checkGuess(ch2GuessInput.value);
 // } 
 
-// // Checks to see if a user's guess is too high, too low or a winner
-// function checkGuess (playerGuess) {
-//   console.log("Current Player Guess: " + playerGuess);
-//   console.log("Correct Guess: " + correctGuess.innerText);
-//   if (playerGuess > correctGuess.innerText) {
-//     return "that's too high";
-//   }
-//   else if (playerGuess < correctGuess.innerText) {
-//     return "that's too low";
-//   }
-//   else {
-//     return "WINNER!!!"
-//   }
-// }
+
 
 
 // // Fill these in with more logic
 // userSpanMin.innerText = ' 1 ';
 // userSpanMax.innerText = ' 100 ';
-// correctGuess.innerText = '50';
