@@ -163,7 +163,11 @@ button {
   display: block;
 }
 
-.hide-disable {
+.clear-disable  {
+  background-color: lightgrey;
+}
+
+.reset-disable  {
   background-color: lightgrey;
 }
 

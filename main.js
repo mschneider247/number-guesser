@@ -17,7 +17,8 @@ var ch2Highlow = document.querySelector('#ch2-highlow');
 var correctGuess = document.querySelector('#correct-guess');
 var clearGameBtn = document.querySelector('.clear__game--btn');
 var resetGameBtn = document.querySelector('.reset__game--btn');
-// var disableClearBtn = document.querySelector('.hide-disable');
+var disableClearBtn = document.querySelector('.clear-disable');
+var disableResetBtn = document.querySelector('.reset-disable');
 
 rangeInputBtn.addEventListener('click', setRange);
 submitBtn.addEventListener('click', startGame);
@@ -25,6 +26,7 @@ clearGameBtn.addEventListener('click', clearGame);
 resetGameBtn.addEventListener('click', resetGame);
 
 clearGameBtn.disabled = true;
+resetGameBtn.disabled = true;
 
 function setRange() {
   // compareValue(minGuess, maxGuess);
@@ -60,8 +62,9 @@ function startGame() {
 
 function enableClearGameBtn() {
   console.log('enableClearGameBtn is running');
-  if ((ch1Guess.innerText === true) && (ch2Guess.innerText === true)){
-    console.log('.innerTexts are true for both guesses')
+  if ((ch1Guess.innerText !== "") && (ch2Guess.innerText !== "")){
+    console.log('.innerTexts are true for both guesses');
+    disableClearBtn.classList.remove("clear-disable");
     clearGameBtn.disabled = false;
   };
 }
@@ -69,6 +72,8 @@ function enableClearGameBtn() {
 function clearGame() {
    ch1GuessInput.value = "";
    ch2GuessInput.value = "";
+   clearGameBtn.disabled = true;
+   disableClearBtn.classList.add("clear-disable");
 }
 
 function resetGame() {
@@ -79,7 +84,12 @@ function resetGame() {
   ch2NameInput.value = "";
   changeAllNames("Challenger 1", ch1Name);
   changeAllNames("Challenger 2", ch2Name);
+  resetGameBtn.disabled = true;
+  disableResetBtn.classList.add("reset-disable");
 };
+
+
+
 
 // Checks user names to make sure they are Alpha Numeric
 function checkAlphaNumeric(name1, name2){
