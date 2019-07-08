@@ -54,19 +54,25 @@ function startGame() {
   changeAllNames(ch1NameInput.value, ch1Name);
   changeAllNames(ch2NameInput.value, ch2Name);
   ch1Guess.innerText = ch1GuessInput.value;
-  ch1Highlow.innerText = checkGuess(ch1GuessInput.value);
+  ch1Highlow.innerText = checkGuess(ch1GuessInput.value, ch1NameInput.value);
   ch2Guess.innerText = ch2GuessInput.value;
-  ch2Highlow.innerText = checkGuess(ch2GuessInput.value);
+  ch2Highlow.innerText = checkGuess(ch2GuessInput.value, ch2NameInput.value);
   enableClearGameBtn();
+  enableResetBtn();
 } 
 
 function enableClearGameBtn() {
-  console.log('enableClearGameBtn is running');
   if ((ch1Guess.innerText !== "") && (ch2Guess.innerText !== "")){
-    console.log('.innerTexts are true for both guesses');
     disableClearBtn.classList.remove("clear-disable");
     clearGameBtn.disabled = false;
   };
+}
+
+function enableResetBtn() {
+  if ((ch1Guess.innerText && ch2Guess.innerText && ch1Name.innerText && ch2Name.innerText) !== "") {
+    disableResetBtn.classList.remove('reset-disable');
+    resetGameBtn.disabled = false;
+  }
 }
 
 function clearGame() {
@@ -119,9 +125,10 @@ function changeAllNames(name, nameArray) {
 };
 
 // Checks to see if a user's guess is too high, too low or a winner
-function checkGuess (playerGuess) {
-  console.log("Current Player Guess: " + playerGuess);
-  console.log("Correct Guess: " + correctGuess.innerText);
+function checkGuess (playerGuess, playerName) {
+  console.log('playerGuess:::', playerGuess);
+  console.log('playerName::::', playerName);
+
   if (playerGuess > correctGuess.innerText) {
     return "that's too high";
   }
@@ -129,9 +136,34 @@ function checkGuess (playerGuess) {
     return "that's too low";
   }
   else {
+    displayWinCard(playerName);
     return "BOOM!"
   }
 };
+
+function displayWinCard(winnerName) {
+  var mainBox = document.querySelector('.results');
+  mainBox.insertAdjacentHTML('afterbegin', `<container class="card__container">
+        <div class="card__container--title">
+          <span class="ch1-name">CHALLENGER 1 NAME</span>
+          <p>vs</p>
+          <span class="ch2-name">CHALLENGER 2 NAME</span>
+        </div>
+        <hr class="card__hr">
+        <div class="card__container--winner"> 
+          <span class="card__span">${winnerName}</span>
+          <p class="card__span">WINNER</p>
+        </div>
+        <hr class="card__hr">
+        <div class="card__span--main">
+          <span class="card__span-guess"></span><p>GUESSES</p>
+          <span class="card__span-minutes"></span><p>MINUTES</p>
+          <button class="card__span--exit" type="button">X</button>
+        </div>  
+      </container>`);
+  // var for the article main, class results
+  //add inner html + html info
+}
 
 // function compareValue(minGuess, maxGuess) {
 //   if (minGuess >= maxGuess) {
