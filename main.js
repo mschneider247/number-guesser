@@ -15,13 +15,16 @@ var ch2Guess = document.querySelector('#ch2--current-guess');
 var ch1Highlow = document.querySelector('#ch1-highlow');
 var ch2Highlow = document.querySelector('#ch2-highlow');
 var correctGuess = document.querySelector('#correct-guess');
-var clearGameBtn = document.querySelector('#clear__game--btn');
-var resetGameBtn = document.querySelector('#reset__game--btn');
+var clearGameBtn = document.querySelector('.clear__game--btn');
+var resetGameBtn = document.querySelector('.reset__game--btn');
+// var disableClearBtn = document.querySelector('.hide-disable');
 
 rangeInputBtn.addEventListener('click', setRange);
 submitBtn.addEventListener('click', startGame);
 clearGameBtn.addEventListener('click', clearGame);
 resetGameBtn.addEventListener('click', resetGame);
+
+clearGameBtn.disabled = true;
 
 function setRange() {
   // compareValue(minGuess, maxGuess);
@@ -44,17 +47,24 @@ function ranNumberFromRange(minRange, maxRange){
 }
 
 function startGame() {
-  checkAlphaNumeric(ch1NameInput.value); 
-  checkAlphaNumeric(ch2NameInput.value);
-  checkNumeric(ch1GuessInput.value);
-  checkNumeric(ch2GuessInput.value);
+  checkAlphaNumeric(ch1NameInput.value, ch2NameInput.value); 
+  checkNumeric(ch1GuessInput.value, ch2GuessInput.value);
   changeAllNames(ch1NameInput.value, ch1Name);
   changeAllNames(ch2NameInput.value, ch2Name);
   ch1Guess.innerText = ch1GuessInput.value;
   ch1Highlow.innerText = checkGuess(ch1GuessInput.value);
   ch2Guess.innerText = ch2GuessInput.value;
   ch2Highlow.innerText = checkGuess(ch2GuessInput.value);
+  enableClearGameBtn();
 } 
+
+function enableClearGameBtn() {
+  console.log('enableClearGameBtn is running');
+  if ((ch1Guess.innerText === true) && (ch2Guess.innerText === true)){
+    console.log('.innerTexts are true for both guesses')
+    clearGameBtn.disabled = false;
+  };
+}
 
 function clearGame() {
    ch1GuessInput.value = "";
@@ -72,29 +82,23 @@ function resetGame() {
 };
 
 // Checks user names to make sure they are Alpha Numeric
-function checkAlphaNumeric(name){
+function checkAlphaNumeric(name1, name2){
   var letters = /^[0-9a-zA-Z]+$/;
-  if(name.match(letters)){ 
-  }
-  else {
-    // Clears fields, pops up error message;
+  if ((!name1.match(letters)) || (!name2.match(letters))) {
     ch1NameInput.value = "";
     ch2NameInput.value = "";
-    return alert("Names must be Alpha Numeric");
-  };
+    alert("Names must be Alpha Numeric"); 
+  }
 };
 
 //Checks user guess to make sure its Numeric
-function checkNumeric(guess){
-  var num = /^[0-9]+$/;
-  if(guess.match(num)){ 
-  }
-  else {
-    // Clears fields, pops up error message;
+function checkNumeric(guess1, guess2){
+  var nums = /^[0-9]+$/;
+  if ((!guess1.match(nums)) || (!guess2.match(nums))) {
     ch1GuessInput.value = "";
     ch2GuessInput.value = "";
-    return alert("Guess must be Numeric");
-  };
+    alert("Guess must be Numeric"); 
+  }
 };
 
 //Sets character name throughout the DOM
@@ -117,7 +121,7 @@ function checkGuess (playerGuess) {
   else {
     return "BOOM!"
   }
-}
+};
 
 // function compareValue(minGuess, maxGuess) {
 //   if (minGuess >= maxGuess) {

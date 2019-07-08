@@ -163,6 +163,10 @@ button {
   display: block;
 }
 
+.hide-disable {
+  background-color: lightgrey;
+}
+
 .user__section--current-guesses {
   display: flex;
   justify-content: space-around;
