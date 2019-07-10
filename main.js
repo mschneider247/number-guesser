@@ -79,15 +79,17 @@ function ranNumberFromRange(minRange, maxRange){
 
 function startGame() {
   checkAlphaNumeric(ch1NameInput.value, ch2NameInput.value); 
-  checkNumeric(ch1GuessInput.value, ch2GuessInput.value);
   changeAllNames(ch1NameInput.value, ch1Name);
   changeAllNames(ch2NameInput.value, ch2Name);
-  ch1Guess.innerText = ch1GuessInput.value;
-  ch1Highlow.innerText = checkGuess(ch1GuessInput.value, ch1NameInput.value);
-  ch2Guess.innerText = ch2GuessInput.value;
-  ch2Highlow.innerText = checkGuess(ch2GuessInput.value, ch2NameInput.value);
-  enableClearGameBtn();
-  enableResetBtn();
+  var verifyNumeric = checkNumeric(ch1GuessInput.value, ch2GuessInput.value);
+  if (verifyNumeric === true) {
+    ch1Guess.innerText = ch1GuessInput.value;
+    ch1Highlow.innerText = checkGuess(ch1GuessInput.value, ch1NameInput.value);
+    ch2Guess.innerText = ch2GuessInput.value;
+    ch2Highlow.innerText = checkGuess(ch2GuessInput.value, ch2NameInput.value);
+    enableClearGameBtn();
+    enableResetBtn();
+  }
 } 
 
 function enableClearGameBtn() {
@@ -171,25 +173,46 @@ function checkRangeNumeric(minValue, maxValue){
 
 function checkNumeric(guess1, guess2){
   var nums = /^[0-9]+$/;
+  var guess1Form = document.querySelector('#user__input--ch1-guess');
+  var guess2Form = document.querySelector('#user__input--ch2-guess');
+  var errorMessage = document.querySelector('#user__article--guesses-not-numeric');
+  var checkGuesses = checkGuessesWithinRange(guess1, guess2);
+  guess1Form.classList.remove("pink-border");
+  guess2Form.classList.remove("pink-border");
+  errorMessage.classList.add("hide-error");
+  if (checkGuessesWithinRange === false){
+    return false;
+  }
   if ((!guess1.match(nums)) || (!guess2.match(nums))) {
     ch1GuessInput.value = "";
     ch2GuessInput.value = "";
-    alert("Guess must be Numeric"); 
+    guess1Form.classList.add("pink-border");
+    guess2Form.classList.add("pink-border");
+    errorMessage.classList.remove("hide-error");
+    return false;
+  }
+  else {
+    return true;
   }
 };
 
-//Sets character name throughout the DOM
+function checkGuessesWithinRange(guess1, guess2){
+  console.log('checkGuessesWithinRange is firing!!!!');
+  console.log('guess1===', guess1);
+  console.log('guess2===', guess2);
+  return true;
+}
+
 function changeAllNames(name, nameArray) {
   for (var i = 0; i < nameArray.length; i++) {
     nameArray[i].innerText=name; 
   };
 };
 
-// Checks to see if a user's guess is too high, too low or a winner
 function checkGuess (playerGuess, playerName) {
   console.log('playerGuess:::', playerGuess);
   console.log('playerName::::', playerName);
-
+  playerGuess = parseInt(playerGuess);
   if (playerGuess > correctGuess.innerText) {
     return "that's too high";
   }
