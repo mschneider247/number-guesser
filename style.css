@@ -270,12 +270,12 @@ img {
   width: 10%;
 }
 
-#range__input--min-range-error {
+#range__input--min-range-error, #range__input--nan-error {
   height: 0%;
   width: 100%;
 }
 
-#range__input--min-range-error p {
+#range__input--min-range-error p, #range__input--nan-error p{
   font-size: 0.55em;
   float: right;
   color: #DD1972; 

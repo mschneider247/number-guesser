@@ -32,11 +32,6 @@ function compareValues(minGuess, maxGuess) {
   console.log('compareValue is firing');
   var minInputForm = document.querySelector('.range__input--min');
   var errorMessage = document.querySelector('#range__input--min-range-error');
-  console.log("minGuess ===", minGuess);
-  console.log("maxGuess ===", maxGuess);
-  minInputForm.classList.remove("pink-border");
-  errorMessage.classList.add("hide-error");
-  console.log(minGuess > maxGuess);
   if (parseInt(minGuess) > parseInt(maxGuess)) {
     removeRanges();
     minInputForm.classList.add("pink-border");
@@ -135,13 +130,24 @@ function checkAlphaNumeric(name1, name2){
 };
 
 function checkRangeNumeric(minValue, maxValue){
+  console.log("checkRangeNumeric is firing");
   console.log(minValue);
   console.log(maxValue);
+  var minInputForm = document.querySelector('.range__input--min');
+  var maxInputForm = document.querySelector('.range__input--max');
+  console.log("minInputForm ===", minInputForm);
+  var errorMessage = document.querySelector('#range__input--nan-error');
+  minInputForm.classList.remove("pink-border");
+  maxInputForm.classList.remove("pink-border");
+  errorMessage.classList.add("hide-error");
   var nums = /^[0-9]+$/;
   if ((!minValue.match(nums)) || (!maxValue.match(nums))) {
+    minInputForm.classList.add("pink-border");
+    console.log("minInputForm ===", minInputForm);
+    maxInputForm.classList.add("pink-border");
+    errorMessage.classList.remove("hide-error");
     minGuess.value = "";
     maxGuess.value = "";
-    alert("range must be Numeric");
     return false; 
   }
   else {
