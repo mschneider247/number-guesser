@@ -31,15 +31,13 @@ resetGameBtn.disabled = true;
 function compareValues(minGuess, maxGuess) {
   console.log('compareValue is firing');
   var minInputForm = document.querySelector('.range__input--min');
+  var maxInputForm = document.querySelector('.range__input--max');
   var errorMessage = document.querySelector('#range__input--min-range-error');
-  console.log("minGuess ===", minGuess);
-  console.log("maxGuess ===", maxGuess);
-  minInputForm.classList.remove("pink-border");
   errorMessage.classList.add("hide-error");
-  console.log(minGuess > maxGuess);
   if (parseInt(minGuess) > parseInt(maxGuess)) {
     removeRanges();
     minInputForm.classList.add("pink-border");
+    maxInputForm.classList.add("pink-border");
     errorMessage.classList.remove("hide-error");
     return false;
   }
@@ -81,15 +79,17 @@ function ranNumberFromRange(minRange, maxRange){
 
 function startGame() {
   checkAlphaNumeric(ch1NameInput.value, ch2NameInput.value); 
-  checkNumeric(ch1GuessInput.value, ch2GuessInput.value);
   changeAllNames(ch1NameInput.value, ch1Name);
   changeAllNames(ch2NameInput.value, ch2Name);
-  ch1Guess.innerText = ch1GuessInput.value;
-  ch1Highlow.innerText = checkGuess(ch1GuessInput.value, ch1NameInput.value);
-  ch2Guess.innerText = ch2GuessInput.value;
-  ch2Highlow.innerText = checkGuess(ch2GuessInput.value, ch2NameInput.value);
-  enableClearGameBtn();
-  enableResetBtn();
+  var verifyNumeric = checkNumeric(ch1GuessInput.value, ch2GuessInput.value);
+  if (verifyNumeric === true) {
+    ch1Guess.innerText = ch1GuessInput.value;
+    ch1Highlow.innerText = checkGuess(ch1GuessInput.value, ch1NameInput.value);
+    ch2Guess.innerText = ch2GuessInput.value;
+    ch2Highlow.innerText = checkGuess(ch2GuessInput.value, ch2NameInput.value);
+    enableClearGameBtn();
+    enableResetBtn();
+  }
 } 
 
 function enableClearGameBtn() {
@@ -127,21 +127,43 @@ function resetGame() {
 
 function checkAlphaNumeric(name1, name2){
   var letters = /^[0-9a-zA-Z]+$/;
+  var name1Form = document.querySelector('#user__input--ch1-name');
+  var name2Form = document.querySelector('#user__input--ch2-name');
+  var errorMessage = document.querySelector('#user__article--names-not-alpha-numeric');
+  console.log("name1Form===", name1Form);
+  console.log("name2Form===", name2Form);
+  console.log("errorMessage===", errorMessage);
+  name1Form.classList.remove("pink-border");
+  name2Form.classList.remove("pink-border");
+  errorMessage.classList.add("hide-error");
   if ((!name1.match(letters)) || (!name2.match(letters))) {
-    ch1NameInput.value = "";
-    ch2NameInput.value = "";
-    alert("Names must be Alpha Numeric"); 
+    // ch1NameInput.value = "";
+    // ch2NameInput.value = "";
+    name1Form.classList.add("pink-border");
+    name2Form.classList.add("pink-border");
+    errorMessage.classList.remove("hide-error");
   }
 };
 
 function checkRangeNumeric(minValue, maxValue){
+  console.log("checkRangeNumeric is firing");
   console.log(minValue);
   console.log(maxValue);
+  var minInputForm = document.querySelector('.range__input--min');
+  var maxInputForm = document.querySelector('.range__input--max');
+  console.log("minInputForm ===", minInputForm);
+  var errorMessage = document.querySelector('#range__input--nan-error');
+  minInputForm.classList.remove("pink-border");
+  maxInputForm.classList.remove("pink-border");
+  errorMessage.classList.add("hide-error");
   var nums = /^[0-9]+$/;
   if ((!minValue.match(nums)) || (!maxValue.match(nums))) {
+    minInputForm.classList.add("pink-border");
+    console.log("minInputForm ===", minInputForm);
+    maxInputForm.classList.add("pink-border");
+    errorMessage.classList.remove("hide-error");
     minGuess.value = "";
     maxGuess.value = "";
-    alert("range must be Numeric");
     return false; 
   }
   else {
@@ -151,25 +173,46 @@ function checkRangeNumeric(minValue, maxValue){
 
 function checkNumeric(guess1, guess2){
   var nums = /^[0-9]+$/;
+  var guess1Form = document.querySelector('#user__input--ch1-guess');
+  var guess2Form = document.querySelector('#user__input--ch2-guess');
+  var errorMessage = document.querySelector('#user__article--guesses-not-numeric');
+  var checkGuesses = checkGuessesWithinRange(guess1, guess2);
+  guess1Form.classList.remove("pink-border");
+  guess2Form.classList.remove("pink-border");
+  errorMessage.classList.add("hide-error");
+  if (checkGuessesWithinRange === false){
+    return false;
+  }
   if ((!guess1.match(nums)) || (!guess2.match(nums))) {
     ch1GuessInput.value = "";
     ch2GuessInput.value = "";
-    alert("Guess must be Numeric"); 
+    guess1Form.classList.add("pink-border");
+    guess2Form.classList.add("pink-border");
+    errorMessage.classList.remove("hide-error");
+    return false;
+  }
+  else {
+    return true;
   }
 };
 
-//Sets character name throughout the DOM
+function checkGuessesWithinRange(guess1, guess2){
+  console.log('checkGuessesWithinRange is firing!!!!');
+  console.log('guess1===', guess1);
+  console.log('guess2===', guess2);
+  return true;
+}
+
 function changeAllNames(name, nameArray) {
   for (var i = 0; i < nameArray.length; i++) {
     nameArray[i].innerText=name; 
   };
 };
 
-// Checks to see if a user's guess is too high, too low or a winner
 function checkGuess (playerGuess, playerName) {
   console.log('playerGuess:::', playerGuess);
   console.log('playerName::::', playerName);
-
+  playerGuess = parseInt(playerGuess);
   if (playerGuess > correctGuess.innerText) {
     return "that's too high";
   }
