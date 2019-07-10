@@ -255,3 +255,29 @@ button {
   padding:0px 7px;
   width:7%;
 }
+
+/*error block styling*/
+.pink-border {
+  border-color: #DD1972;
+}
+
+.hide-error {
+  display: none;
+}
+
+img {
+  margin-bottom: 2%;
+  width: 10%;
+}
+
+#range__input--min-range-error {
+  height: 0%;
+  width: 100%;
+}
+
+#range__input--min-range-error p {
+  font-size: 0.55em;
+  float: right;
+  color: #DD1972; 
+}
+
