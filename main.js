@@ -31,10 +31,13 @@ resetGameBtn.disabled = true;
 function compareValues(minGuess, maxGuess) {
   console.log('compareValue is firing');
   var minInputForm = document.querySelector('.range__input--min');
+  var maxInputForm = document.querySelector('.range__input--max');
   var errorMessage = document.querySelector('#range__input--min-range-error');
+  errorMessage.classList.add("hide-error");
   if (parseInt(minGuess) > parseInt(maxGuess)) {
     removeRanges();
     minInputForm.classList.add("pink-border");
+    maxInputForm.classList.add("pink-border");
     errorMessage.classList.remove("hide-error");
     return false;
   }
@@ -122,10 +125,21 @@ function resetGame() {
 
 function checkAlphaNumeric(name1, name2){
   var letters = /^[0-9a-zA-Z]+$/;
+  var name1Form = document.querySelector('#user__input--ch1-name');
+  var name2Form = document.querySelector('#user__input--ch2-name');
+  var errorMessage = document.querySelector('#user__article--names-not-alpha-numeric');
+  console.log("name1Form===", name1Form);
+  console.log("name2Form===", name2Form);
+  console.log("errorMessage===", errorMessage);
+  name1Form.classList.remove("pink-border");
+  name2Form.classList.remove("pink-border");
+  errorMessage.classList.add("hide-error");
   if ((!name1.match(letters)) || (!name2.match(letters))) {
-    ch1NameInput.value = "";
-    ch2NameInput.value = "";
-    alert("Names must be Alpha Numeric"); 
+    // ch1NameInput.value = "";
+    // ch2NameInput.value = "";
+    name1Form.classList.add("pink-border");
+    name2Form.classList.add("pink-border");
+    errorMessage.classList.remove("hide-error");
   }
 };
 

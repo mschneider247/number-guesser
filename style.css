@@ -270,14 +270,28 @@ img {
   width: 10%;
 }
 
+#user__article--names-not-alpha-numeric img {
+  float: left;
+}
+
 #range__input--min-range-error, #range__input--nan-error {
   height: 0%;
   width: 100%;
 }
 
-#range__input--min-range-error p, #range__input--nan-error p{
+#user__article--names-not-alpha-numeric {
+  margin-right: 25%;
+  height: 0%;
+}
+
+#range__input--min-range-error p, #range__input--nan-error p {
   font-size: 0.55em;
   float: right;
+  color: #DD1972; 
+}
+
+#user__article--names-not-alpha-numeric p {
+  font-size: 0.55em;
   color: #DD1972; 
 }
 
