@@ -10,13 +10,13 @@
       <p>Correct Guess: <span id="correct-guess"></span></p>
   </section>
   <header>
-    <div class="navbar__h1">
-      <h1><span>NUMBER</span> GUESSER</h1>
-    </div>
+    <div class="navbar_text">
+      <h1 class="navbar__h1"><span class="navbar_span">NUMBER</span>GUESSER</h1>
       <div class="navbar__subhead">
         <hr>
         <h4 class="navbar__h4">ULTIMATE CHALLENGER EDITION</h4>
         <hr>
+      </div>
     </div>
   </header>
   <main class="main">
@@ -38,33 +38,41 @@
               <input class="range__input--max" type="text" name="">
             </div>
           </form>
-            <button class="range__input--btn">UPDATE</button>
+          <button class="range__input--btn">UPDATE</button>
         </div>
       </container>
-      <container id="user__article">
-        <p>The Current Range is<span class="user__span--min"></span>to<span class="user__span--max"></span></p>
+      <container class="user__article">
+        <p>The Current Range is <span class="user__span--min"></span>to <span class="user__span--max"></span></p>
         <p class="ch1-name">Challenger 1</p>
           <form class="user__form--ch1">
-            <label>Name</label>
-            <input id="user__input--ch1-name" type="text" name="">
-            <label>Guess</label>
-            <input id="user__input--ch1-guess" type="text" name="">
+            <div class="user__form--one">
+              <label>Name</label>
+              <input id="user__input--ch1-name" type="text" name="">
+            </div>
+            <div class="user__form--one-guess">
+              <label>Guess</label>
+              <input id="user__input--ch1-guess" type="text" name="">
+            </div>
           </form>
         <p class="ch2-name">Challenger 2</p>
           <form class="user__form--ch2">
-            <label>Name</label>
-            <input id="user__input--ch2-name" type="text" name="">
-            <label>Guess</label>
-            <input id="user__input--ch2-guess" type="text" name="">
+            <div class="user__form--two">
+              <label>Name</label>
+              <input id="user__input--ch2-name" type="text" name="">
+            </div>
+            <div class="user__form--two-guess">
+              <label>Guess</label>
+              <input id="user__input--ch2-guess" type="text" name="">
+            </div>
           </form>
         <section class="user__section--submit-btns">
-          <button id="submit__btn" name="Submit Guess" type="button">Submit Guess</button>
-          <button class="reset__game--btn reset-disable" name="Reset Game" type="button">Reset Game</button>
-          <button class="clear__game--btn clear-disable" name="Clear Game" type="button">Clear Game</button>
+          <button class="submit__btn" name="Submit Guess" type="button">SUBMIT GUESS</button>
+          <button class="reset__game--btn reset-disable" name="Reset Game" type="button">RESET GAME</button>
+          <button class="clear__game--btn clear-disable" name="Clear Game" type="button">CLEAR GAME</button>
         </section>
       </container>
-      <container id="user__article--latest-score">
-        <p class="user__article--latest-score">Latest Score</p>
+      <container class="user__article--latest-score">
+        <p class="user__article--title">Latest Score</p>
         <section class="user__section--current-guesses">
           <div class="">
             <p class="ch1-name">Challenger 1 Name</p>
