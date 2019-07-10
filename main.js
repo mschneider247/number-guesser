@@ -28,31 +28,52 @@ resetGameBtn.addEventListener('click', resetGame);
 clearGameBtn.disabled = true;
 resetGameBtn.disabled = true;
 
+function compareValues(minGuess, maxGuess) {
+  console.log('compareValue is firing');
+  var minInputForm = document.querySelector('.range__input--min');
+  var errorMessage = document.querySelector('#range__input--min-range-error');
+  console.log("minGuess ===", minGuess);
+  console.log("maxGuess ===", maxGuess);
+  minInputForm.classList.remove("pink-border");
+  errorMessage.classList.add("hide-error");
+  console.log(minGuess > maxGuess);
+  if (parseInt(minGuess) > parseInt(maxGuess)) {
+    removeRanges();
+    minInputForm.classList.add("pink-border");
+    errorMessage.classList.remove("hide-error");
+    return false;
+  }
+  else {
+    return true;
+  }
+};
+
+function removeRanges() {
+  minGuess.value = "";
+  maxGuess.value = "";
+  userSpanMin.innerText = "";
+  userSpanMax.innerText = "";
+}
+
 function setRange() {
   var minValue = minGuess.value;
   var maxValue = maxGuess.value;
   var rangeCheck = checkRangeNumeric(minValue, maxValue);
-  var compareValueCheck = compareValue(minValue, maxValue);
-  if (compareValueCheck === false){
-      console.log('compare vlaue is returing false');
-      return;
-  }
-  if (rangeCheck === true){
-   var generatedNumber = ranNumberFromRange(minValue, maxValue);
-  console.log("generatedNumber", generatedNumber);
-  userSpanMin.innerText = minValue;
-  userSpanMax.innerText = maxValue;
-  correctGuess.innerText = generatedNumber; 
-  }
-  else {
-    return;
+  var compareValue = compareValues(minValue, maxValue);
+  if (compareValue === true) {
+      if (rangeCheck === true){
+        var generatedNumber = ranNumberFromRange(minValue, maxValue);
+        console.log("generatedNumber", generatedNumber);
+        userSpanMin.innerText = minValue;
+        userSpanMax.innerText = maxValue;
+        correctGuess.innerText = generatedNumber; 
+      }
   }
 }
 
 function ranNumberFromRange(minRange, maxRange){
   var range = parseInt(maxRange) - parseInt(minRange);
-  console.log(typeof range)
-  console.log("range", range);
+  console.log("range == ", range);
   var randomNum = Math.random() * range + parseInt(minRange);
   console.log(Math.floor(randomNum));
   return Math.floor(randomNum);
@@ -104,10 +125,6 @@ function resetGame() {
   disableResetBtn.classList.add("reset-disable");
 };
 
-
-
-
-// Checks user names to make sure they are Alpha Numeric
 function checkAlphaNumeric(name1, name2){
   var letters = /^[0-9a-zA-Z]+$/;
   if ((!name1.match(letters)) || (!name2.match(letters))) {
@@ -118,6 +135,8 @@ function checkAlphaNumeric(name1, name2){
 };
 
 function checkRangeNumeric(minValue, maxValue){
+  console.log(minValue);
+  console.log(maxValue);
   var nums = /^[0-9]+$/;
   if ((!minValue.match(nums)) || (!maxValue.match(nums))) {
     minGuess.value = "";
@@ -128,9 +147,8 @@ function checkRangeNumeric(minValue, maxValue){
   else {
     return true;
   }
-
 };
-//Checks user guess to make sure its Numeric
+
 function checkNumeric(guess1, guess2){
   var nums = /^[0-9]+$/;
   if ((!guess1.match(nums)) || (!guess2.match(nums))) {
@@ -184,13 +202,4 @@ function displayWinCard(winnerName) {
           <button class="card__span--exit" type="button">X</button>
         </div>  
       </container>`);
-  // var for the article main, class results
-  //add inner html + html info
 }
-
-function compareValue(minGuess, maxGuess) {
-  if (minGuess > maxGuess) {
-    console.log("its working")
-    return false;
-  };
-};
