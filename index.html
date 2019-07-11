@@ -77,6 +77,10 @@
             <img src="images/error-icon.svg">
             <p>Guesses must be numbers</p>
           </container>
+          <container id="range__input--outofrange-error" class="hide-error">
+            <img src="images/error-icon.svg">
+            <p>Try guesses within range!</p>
+          </container>
         <section class="user__section--submit-btns">
           <button class="submit__btn" name="Submit Guess" type="button">SUBMIT GUESS</button>
           <button class="reset__game--btn reset-disable" name="Reset Game" type="button">RESET GAME</button>
@@ -89,13 +93,13 @@
           <div class="">
             <p class="ch1-name">Challenger 1 Name</p>
             <p>current guess</p>
-            <p id="ch1--current-guess">97</p>
+            <p id="ch1--current-guess"></p>
             <p id="ch1-highlow">too high/too low</p>          
           </div>
           <div class="">
             <p class="ch2-name">Challenger 2 Name</p>
             <p>current guess</p>
-            <p id="ch2--current-guess">3</p>
+            <p id="ch2--current-guess"></p>
             <p id="ch2-highlow">too high/too low</p>          
           </div>
         </section>

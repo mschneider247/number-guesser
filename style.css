@@ -357,7 +357,7 @@ img {
   width: 10%;
 }
 
-#user__article--names-not-alpha-numeric img, #user__article--guesses-not-numeric img {
+#user__article--names-not-alpha-numeric img, #user__article--guesses-not-numeric img, #range__input--outofrange-error {
   float: left;
 }
 
@@ -371,8 +371,8 @@ img {
   height: 0%;
 }
 
-#user__article--guesses-not-numeric {
-  margin-left: 50%;
+#user__article--guesses-not-numeric, #range__input--outofrange-error {
+  margin-left: 40%;
   height: 0%;
 }
 
@@ -382,7 +382,7 @@ img {
   color: #DD1972; 
 }
 
-#user__article--names-not-alpha-numeric p, #user__article--guesses-not-numeric p {
+#user__article--names-not-alpha-numeric p, #user__article--guesses-not-numeric p, #range__input--outofrange-error p {
   font-size: 0.55em;
   color: #DD1972; 
 }
