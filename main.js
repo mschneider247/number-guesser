@@ -28,8 +28,43 @@ resetGameBtn.addEventListener('click', resetGame);
 clearGameBtn.disabled = true;
 resetGameBtn.disabled = true;
 
+function setRange() {
+  var minValue = minGuess.value;
+  var maxValue = maxGuess.value;
+  var rangeCheck = checkRangeNumeric(minValue, maxValue);
+  var compareValue = compareValues(minValue, maxValue);
+  if (compareValue === true) {
+      if (rangeCheck === true){
+        var generatedNumber = ranNumberFromRange(minValue, maxValue);
+        userSpanMin.innerText = minValue;
+        userSpanMax.innerText = maxValue;
+        correctGuess.innerText = generatedNumber; 
+      }
+  }
+}
+
+function checkRangeNumeric(minValue, maxValue){
+  var minInputForm = document.querySelector('.range__input--min');
+  var maxInputForm = document.querySelector('.range__input--max');
+  var errorMessage = document.querySelector('#range__input--nan-error');
+  minInputForm.classList.remove("pink-border");
+  maxInputForm.classList.remove("pink-border");
+  errorMessage.classList.add("hide-error");
+  var nums = /^[0-9]+$/;
+  if ((!minValue.match(nums)) || (!maxValue.match(nums))) {
+    minInputForm.classList.add("pink-border");
+    maxInputForm.classList.add("pink-border");
+    errorMessage.classList.remove("hide-error");
+    minGuess.value = "";
+    maxGuess.value = "";
+    return false; 
+  }
+  else {
+    return true;
+  }
+};
+
 function compareValues(minGuess, maxGuess) {
-  console.log('compareValue is firing');
   var minInputForm = document.querySelector('.range__input--min');
   var maxInputForm = document.querySelector('.range__input--max');
   var errorMessage = document.querySelector('#range__input--min-range-error');
@@ -46,35 +81,17 @@ function compareValues(minGuess, maxGuess) {
   }
 };
 
+function ranNumberFromRange(minRange, maxRange){
+  var range = parseInt(maxRange) - parseInt(minRange);
+  var randomNum = Math.random() * range + parseInt(minRange);
+  return Math.floor(randomNum);
+}
+
 function removeRanges() {
   minGuess.value = "";
   maxGuess.value = "";
   userSpanMin.innerText = "";
   userSpanMax.innerText = "";
-}
-
-function setRange() {
-  var minValue = minGuess.value;
-  var maxValue = maxGuess.value;
-  var rangeCheck = checkRangeNumeric(minValue, maxValue);
-  var compareValue = compareValues(minValue, maxValue);
-  if (compareValue === true) {
-      if (rangeCheck === true){
-        var generatedNumber = ranNumberFromRange(minValue, maxValue);
-        console.log("generatedNumber", generatedNumber);
-        userSpanMin.innerText = minValue;
-        userSpanMax.innerText = maxValue;
-        correctGuess.innerText = generatedNumber; 
-      }
-  }
-}
-
-function ranNumberFromRange(minRange, maxRange){
-  var range = parseInt(maxRange) - parseInt(minRange);
-  console.log("range == ", range);
-  var randomNum = Math.random() * range + parseInt(minRange);
-  console.log(Math.floor(randomNum));
-  return Math.floor(randomNum);
 }
 
 function startGame() {
@@ -92,83 +109,25 @@ function startGame() {
   }
 } 
 
-function enableClearGameBtn() {
-  if ((ch1Guess.innerText !== "") && (ch2Guess.innerText !== "")){
-    disableClearBtn.classList.remove("clear-disable");
-    clearGameBtn.disabled = false;
-  };
-}
-
-function enableResetBtn() {
-  if ((ch1Guess.innerText && ch2Guess.innerText && ch1Name.innerText && ch2Name.innerText) !== "") {
-    disableResetBtn.classList.remove('reset-disable');
-    resetGameBtn.disabled = false;
-  }
-}
-
-function clearGame() {
-   ch1GuessInput.value = "";
-   ch2GuessInput.value = "";
-   clearGameBtn.disabled = true;
-   disableClearBtn.classList.add("clear-disable");
-}
-
-function resetGame() {
-  correctGuess.innerText = ranNumberFromRange(minGuess.value, maxGuess.value);
-  ch1GuessInput.value = "";
-  ch2GuessInput.value = "";
-  ch1NameInput.value = "";
-  ch2NameInput.value = "";
-  changeAllNames("Challenger 1", ch1Name);
-  changeAllNames("Challenger 2", ch2Name);
-  resetGameBtn.disabled = true;
-  disableResetBtn.classList.add("reset-disable");
-};
-
 function checkAlphaNumeric(name1, name2){
   var letters = /^[0-9a-zA-Z]+$/;
   var name1Form = document.querySelector('#user__input--ch1-name');
   var name2Form = document.querySelector('#user__input--ch2-name');
   var errorMessage = document.querySelector('#user__article--names-not-alpha-numeric');
-  console.log("name1Form===", name1Form);
-  console.log("name2Form===", name2Form);
-  console.log("errorMessage===", errorMessage);
   name1Form.classList.remove("pink-border");
   name2Form.classList.remove("pink-border");
   errorMessage.classList.add("hide-error");
   if ((!name1.match(letters)) || (!name2.match(letters))) {
-    // ch1NameInput.value = "";
-    // ch2NameInput.value = "";
     name1Form.classList.add("pink-border");
     name2Form.classList.add("pink-border");
     errorMessage.classList.remove("hide-error");
   }
 };
 
-function checkRangeNumeric(minValue, maxValue){
-  console.log("checkRangeNumeric is firing");
-  console.log(minValue);
-  console.log(maxValue);
-  var minInputForm = document.querySelector('.range__input--min');
-  var maxInputForm = document.querySelector('.range__input--max');
-  console.log("minInputForm ===", minInputForm);
-  var errorMessage = document.querySelector('#range__input--nan-error');
-  minInputForm.classList.remove("pink-border");
-  maxInputForm.classList.remove("pink-border");
-  errorMessage.classList.add("hide-error");
-  var nums = /^[0-9]+$/;
-  if ((!minValue.match(nums)) || (!maxValue.match(nums))) {
-    minInputForm.classList.add("pink-border");
-    console.log("minInputForm ===", minInputForm);
-    maxInputForm.classList.add("pink-border");
-    errorMessage.classList.remove("hide-error");
-    minGuess.value = "";
-    maxGuess.value = "";
-    return false; 
-  }
-  else {
-    return true;
-  }
+function changeAllNames(name, nameArray) {
+  for (var i = 0; i < nameArray.length; i++) {
+    nameArray[i].innerText=name; 
+  };
 };
 
 function checkNumeric(guess1, guess2){
@@ -197,21 +156,10 @@ function checkNumeric(guess1, guess2){
 };
 
 function checkGuessesWithinRange(guess1, guess2){
-  console.log('checkGuessesWithinRange is firing!!!!');
-  console.log('guess1===', guess1);
-  console.log('guess2===', guess2);
   return true;
 }
 
-function changeAllNames(name, nameArray) {
-  for (var i = 0; i < nameArray.length; i++) {
-    nameArray[i].innerText=name; 
-  };
-};
-
 function checkGuess (playerGuess, playerName) {
-  console.log('playerGuess:::', playerGuess);
-  console.log('playerName::::', playerName);
   playerGuess = parseInt(playerGuess);
   if (playerGuess > correctGuess.innerText) {
     return "that's too high";
@@ -246,3 +194,36 @@ function displayWinCard(winnerName) {
         </div>  
       </container>`);
 }
+
+function enableClearGameBtn() {
+  if ((ch1Guess.innerText !== "") && (ch2Guess.innerText !== "")){
+    disableClearBtn.classList.remove("clear-disable");
+    clearGameBtn.disabled = false;
+  };
+}
+
+function enableResetBtn() {
+  if ((ch1Guess.innerText && ch2Guess.innerText && ch1Name.innerText && ch2Name.innerText) !== "") {
+    disableResetBtn.classList.remove('reset-disable');
+    resetGameBtn.disabled = false;
+  }
+}
+
+function clearGame() {
+   ch1GuessInput.value = "";
+   ch2GuessInput.value = "";
+   clearGameBtn.disabled = true;
+   disableClearBtn.classList.add("clear-disable");
+}
+
+function resetGame() {
+  correctGuess.innerText = ranNumberFromRange(minGuess.value, maxGuess.value);
+  ch1GuessInput.value = "";
+  ch2GuessInput.value = "";
+  ch1NameInput.value = "";
+  ch2NameInput.value = "";
+  changeAllNames("Challenger 1", ch1Name);
+  changeAllNames("Challenger 2", ch2Name);
+  resetGameBtn.disabled = true;
+  disableResetBtn.classList.add("reset-disable");
+};
